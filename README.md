@@ -1,35 +1,16 @@
 # Communities Assets
 
-This repository contains required assets to setup Salesforce communities when using default pages:
-
--   Authorization Required Page: CommunitiesLogin
--   Bandwidth Exceeded Page: BandwidthExceeded
--   File Not Found Page: FileNotFound
--   Generic Error Page: Exception
--   In Maintenance Page: InMaintenance
--   Index Page: CommunitiesLanding
--   Self Registration Page: CommunitiesSelfReg
-
-The repository content can be installed as an unlocked package before deploying a Community using default assets.
+This repository contains required assets to setup Salesforce communities when using default pages. Its content can be installed as an unlocked package before deploying a Community using default assets.
 
 ## Installing as an unlocked package
 
--   Clone the [CommunitiesAssets](https://github.com/RemiLeGuin/CommunitiesAssets) repository to your local machine.
--   Connect to a default org (Sandbox, Trailhead Playground, Scratch Org...) with Dev Hub and Unlocked Packages enabled.
--   Install the communities-assets directory as an unlocked package:
-```
-sfdx force:package:create --name "Communities Assets" --description "Apex classes, VisualForce pages, Aura components and static resources basic assets to initiate a Community in Salesforce." --packagetype Unlocked --path communities-assets --nonamespace --targetdevhubusername /*targeted org or username*/
-```
-```
-sfdx force:package:version:create --package "Communities Assets" --path communities-assets --installationkey /*password*/ --wait 10 --targetdevhubusername /*targeted org or username*/
-```
-```
-sfdx force:package:install --wait 10 --publishwait 10 --package "Communities Assets@0.1.0-1" --installationkey /*password*/ --noprompt --targetusername /*targeted org or username*/
-```
+-   [Follow this link for Sandboxes](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tB0000000Oiq0IAC "https://test.salesforce.com/packaging/installPackage.apexp?p0=04tB0000000Oiq0IAC")
+-   [Follow this link for Production environments, Developer Editions and Trailhead Playgrounds](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tB0000000Oiq0IAC "https://login.salesforce.com/packaging/installPackage.apexp?p0=04tB0000000Oiq0IAC")
 
 ## Using the unlocked package
 
--   In the sfdx-project.json file of any of your dependant package, add the dependency to the Communities Assets package:
+In the sfdx-project.json file of any of your dependant package, add the dependency to the Communities Assets package:
+
 ```
 {
   "packageDirectories": [
@@ -42,16 +23,17 @@ sfdx force:package:install --wait 10 --publishwait 10 --package "Communities Ass
       "dependencies": [
         {
           "package": "Communities Assets",
-          "versionNumber": "0.1.0.LATEST"
+          "versionNumber": "1.0.0.LATEST"
         }
       ]
     }
   ],
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "47.0",
+  "sourceApiVersion": "48.0",
   "packageAliases": {
-    "Communities Assets": "ID",
+    "Communities Assets": "0HoB0000000Cb0iKAC",
+    "Communities Assets@1.0.0-1": "04tB0000000Oiq0IAC",
     "Your Project": "ID"
   }
 }

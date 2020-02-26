@@ -19,19 +19,25 @@ global class LightningLoginFormController {
     @AuraEnabled
     public static Boolean getIsUsernamePasswordEnabled() {
         Auth.AuthConfiguration authConfig = getAuthConfig();
-        return authConfig.getUsernamePasswordEnabled();
+        if (authConfig != null) {
+            return authConfig.getUsernamePasswordEnabled();
+        }
+        return null;
     }
 
     @AuraEnabled
     public static Boolean getIsSelfRegistrationEnabled() {
         Auth.AuthConfiguration authConfig = getAuthConfig();
-        return authConfig.getSelfRegistrationEnabled();
+        if (authConfig != null) {
+            return authConfig.getSelfRegistrationEnabled();
+        }
+        return null;
     }
 
     @AuraEnabled
     public static String getSelfRegistrationUrl() {
         Auth.AuthConfiguration authConfig = getAuthConfig();
-        if (authConfig.getSelfRegistrationEnabled()) {
+        if (authConfig != null && authConfig.getSelfRegistrationEnabled()) {
             return authConfig.getSelfRegistrationUrl();
         }
         return null;
@@ -40,13 +46,22 @@ global class LightningLoginFormController {
     @AuraEnabled
     public static String getForgotPasswordUrl() {
         Auth.AuthConfiguration authConfig = getAuthConfig();
-        return authConfig.getForgotPasswordUrl();
+        if (authConfig != null) {
+            return authConfig.getForgotPasswordUrl();
+        }
+        return null;
     }
     
     @TestVisible
     private static Auth.AuthConfiguration getAuthConfig(){
         Id networkId = Network.getNetworkId();
-        Auth.AuthConfiguration authConfig = new Auth.AuthConfiguration(networkId,'');
+        Auth.AuthConfiguration authConfig;
+        try {
+            authConfig = new Auth.AuthConfiguration(networkId, '');
+        }
+        catch (Exception e) {
+            authConfig = null;
+        }
         return authConfig;
     }
 
